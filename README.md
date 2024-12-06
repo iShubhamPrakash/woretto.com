@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Woretto - AI-Powered Expense Tracking
+
+Woretto is a cutting-edge financial management platform that uses artificial intelligence to make managing your finances easy and efficient. Stay in control of your budget with zero hassle.
+
+## Features
+
+### 🧠 AI-Powered Insights
+- Understand your spending patterns
+- Get actionable insights instantly
+- AI-driven recommendations tailored to your financial goals
+
+### 💳 Seamless Integration
+- Connect your bank accounts and cards securely
+- Real-time tracking of expenses
+- Multi-device access (web, mobile, and tablet)
+
+### 📊 Smart Budgeting
+- Personalized budgeting recommendations
+- Instant categorization of expenses
+- AI-driven financial planning
+
+## How It Works
+
+1. **Sign Up in Seconds**
+   - Quick account creation
+   - Secure connection to your financial accounts
+
+2. **Let AI Do the Work**
+   - Automatic expense categorization
+   - Real-time tracking and monitoring
+   - Smart financial insights
+
+3. **Achieve Your Goals**
+   - Use AI-powered insights to optimize spending
+   - Stay on track with your financial goals
+   - Save more with intelligent recommendations
+
+## Plans
+
+### Free Plan
+- Basic features to get started
+- Perfect for individual users
+- Essential expense tracking
+
+### Premium Plan
+- Advanced AI features
+- Designed for serious financial planning
+- Enhanced insights and recommendations
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Radix UI Components
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Author
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Shubham Prakash**  
+Email: shubham@woretto.com
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
+This project is private and proprietary. All rights reserved.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Note: Woretto is currently under development. Many features are coming soon!*
