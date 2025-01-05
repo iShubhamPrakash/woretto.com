@@ -1,28 +1,14 @@
-'use client';
-
 import { Brain, CreditCard, BarChart3, TabletsIcon as Devices, Facebook, Twitter, Linkedin, Github } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { GradientButton } from "@/components/ui/gradient-button"
 import { FeatureCard } from "@/components/feature-card"
 import { StepCard } from "@/components/step-card"
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogCancel,
-} from "@/components/ui/alert-dialog"
-import { useState } from "react"
+import { currentUser } from "@clerk/nextjs/server"
+import Link from "next/link"
+import { InteractiveSection } from "@/components/landing/interactive-section"
 
-export default function LandingPage() {
-  const [isAlertOpen, setIsAlertOpen] = useState(false)
-  const [alertMessage, setAlertMessage] = useState("")
-
-  const showAlert = (message: string) => {
-    setAlertMessage(message)
-    setIsAlertOpen(true)
-  }
+export default async function LandingPage() {
+  const user = await currentUser();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white">
@@ -33,22 +19,25 @@ export default function LandingPage() {
             <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
               Woretto
             </h1>
-            <Button variant="ghost" onClick={() => showAlert("Sign in functionality will be available soon.")}>Sign In</Button>
+            <div className="space-x-4">
+              {user ? (
+                <Link href="/dashboard">
+                  <Button variant="ghost">Dashboard</Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/sign-in">
+                    <Button variant="ghost">Sign In</Button>
+                  </Link>
+                  <Link href="/sign-up">
+                    <Button variant="default">Get Started</Button>
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </nav>
-
-      <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Coming Soon!</AlertDialogTitle>
-            <AlertDialogDescription>
-              {alertMessage}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogCancel>Close</AlertDialogCancel>
-        </AlertDialogContent>
-      </AlertDialog>
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
@@ -62,9 +51,21 @@ export default function LandingPage() {
           <p className="text-slate-400 max-w-2xl mx-auto mb-8">
             Woretto uses cutting-edge AI to make managing your finances easy and efficient. Stay in control of your budget with zero hassle.
           </p>
-          <GradientButton className="text-lg" onClick={() => showAlert("Free tracking features will be available soon.")}>
-            Start Tracking for Free
-          </GradientButton>
+          <div className="space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row justify-center">
+            {user ? (
+              <Link href="/dashboard">
+                <GradientButton className="text-lg w-full md:w-auto">
+                  Go to Dashboard
+                </GradientButton>
+              </Link>
+            ) : (
+              <Link href="/sign-up">
+                <GradientButton className="text-lg w-full md:w-auto">
+                  Start Tracking for Free
+                </GradientButton>
+              </Link>
+            )}
+          </div>
         </div>
       </section>
 
@@ -144,20 +145,18 @@ export default function LandingPage() {
 
       {/* Pricing Section */}
       <section className="py-20 px-4">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            Simple Pricing
-          </h2>
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12">Simple, Transparent Pricing</h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="bg-slate-950/50 border border-slate-800 rounded-lg p-8">
               <h3 className="text-2xl font-bold mb-4">Free Plan</h3>
               <p className="text-slate-400 mb-6">Basic features to get started</p>
-              <GradientButton onClick={() => showAlert("Free plan registration will be available soon.")}>Get Started</GradientButton>
+              <InteractiveSection type="free-plan" />
             </div>
             <div className="bg-slate-950/50 border border-slate-800 rounded-lg p-8">
               <h3 className="text-2xl font-bold mb-4">Premium Plan</h3>
-              <p className="text-slate-400 mb-6">Advanced AI features for the serious planner</p>
-              <GradientButton onClick={() => showAlert("Premium plan upgrade will be available soon.")}>Upgrade Now</GradientButton>
+              <p className="text-slate-400 mb-6">Advanced features for power users</p>
+              <InteractiveSection type="premium-plan" />
             </div>
           </div>
         </div>
@@ -172,30 +171,37 @@ export default function LandingPage() {
           <p className="text-slate-400 max-w-2xl mx-auto mb-8">
             Sign up today and experience the Woretto difference.
           </p>
-          <GradientButton className="text-lg" onClick={() => showAlert("Free tracking features will be available soon.")}>
-            Start Tracking for Free
-          </GradientButton>
+          <div className="space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row justify-center">
+            {user ? (
+              <Link href="/dashboard">
+                <GradientButton className="text-lg w-full md:w-auto">
+                  Go to Dashboard
+                </GradientButton>
+              </Link>
+            ) : (
+              <Link href="/sign-up">
+                <GradientButton className="text-lg w-full md:w-auto">
+                  Start Tracking for Free
+                </GradientButton>
+              </Link>
+            )}
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 border-t border-slate-800 py-12 px-4">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
+      <footer className="bg-slate-950 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h4 className="font-bold mb-4">Links</h4>
+              <InteractiveSection type="footer-links" />
+            </div>
             <div>
               <h3 className="text-xl font-bold mb-4">Woretto</h3>
               <p className="text-slate-400">
                 Your AI-powered financial companion
               </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Links</h4>
-              <ul className="space-y-2 text-slate-400">
-                <li><a href="#" onClick={(e) => { e.preventDefault(); showAlert("About page will be available soon."); }} className="hover:text-white">About</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); showAlert("Blog will be available soon."); }} className="hover:text-white">Blog</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); showAlert("Terms of Service will be available soon."); }} className="hover:text-white">Terms of Service</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); showAlert("Privacy Policy will be available soon."); }} className="hover:text-white">Privacy Policy</a></li>
-              </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4">Contact</h4>
@@ -208,20 +214,7 @@ export default function LandingPage() {
             </div>
             <div>
               <h4 className="font-bold mb-4">Social</h4>
-              <div className="flex space-x-4">
-                <a href="#" onClick={(e) => { e.preventDefault(); showAlert("Facebook page will be available soon."); }} className="text-slate-400 hover:text-white">
-                  <Facebook className="h-6 w-6" />
-                </a>
-                <a href="#" onClick={(e) => { e.preventDefault(); showAlert("Twitter page will be available soon."); }} className="text-slate-400 hover:text-white">
-                  <Twitter className="h-6 w-6" />
-                </a>
-                <a href="#" onClick={(e) => { e.preventDefault(); showAlert("Linkedin page will be available soon."); }} className="text-slate-400 hover:text-white">
-                  <Linkedin className="h-6 w-6" />
-                </a>
-                <a href="#" onClick={(e) => { e.preventDefault(); showAlert("Github page will be available soon."); }} className="text-slate-400 hover:text-white">
-                  <Github className="h-6 w-6" />
-                </a>
-              </div>
+              <InteractiveSection type="social-links" />
             </div>
           </div>
           <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
