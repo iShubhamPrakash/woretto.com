@@ -1,0 +1,14 @@
+{
+  "name": "@workspace/tailwind-config",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "type": "module",
+  "files": [
+    "tailwind.config.js"
+  ],
+  "dependencies": {
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
+  }
+} 
