@@ -1,0 +1,32 @@
+{
+  "name": "@workspace/database",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "clean": "rm -rf .turbo node_modules",
+    "generate": "drizzle-kit generate",
+    "push": "drizzle-kit push",
+    "migrate": "drizzle-kit migrate",
+    "seed": "tsx src/seed.ts",
+    "studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.41.0",
+    "pg": "^8.14.1",
+    "postgres": "^3.4.5",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.30",
+    "@types/uuid": "^9.0.8",
+    "drizzle-kit": "^0.30.6",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  }
+}
